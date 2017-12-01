@@ -2,6 +2,8 @@
 
 > vue + vuex + vue-resource + vue-router + vue-awesome-swiper 模仿qq音乐APP
 
+> 功能和代码还不够完善，后续会再更新
+
 > 本人也是初学vue，不足之处还希望大家多多指教，共同学习进步
 
 ### 已实现功能
@@ -38,23 +40,23 @@ npm run build
 
 #### 首页
 
-![首页](https://github.com/LuanMingyang/vue2-music-app/raw/master/preview/musicHall.png){:width="200px"}
+<img width="200" src="https://github.com/LuanMingyang/vue2-music-app/raw/master/preview/musicHall.png" alt="首页"/>
 
 #### 搜索
 
-![搜索](https://github.com/LuanMingyang/vue2-music-app/raw/master/preview/search2.png){:width="200px"}
-![搜索](https://github.com/LuanMingyang/vue2-music-app/raw/master/preview/search.png){:width="200px"}
+<img width="200" src="https://github.com/LuanMingyang/vue2-music-app/raw/master/preview/search2.png" alt="搜索"/>
+<img width="200" src="https://github.com/LuanMingyang/vue2-music-app/raw/master/preview/search.png" alt="搜索结果"/>
 
 #### 歌手首页
 
-![歌手首页](https://github.com/LuanMingyang/vue2-music-app/raw/master/preview/singer.png){:width="200px"}
+<img width="200" src="https://github.com/LuanMingyang/vue2-music-app/raw/master/preview/singer.png" alt="歌手首页"/>
 
 #### 排行榜
 
-![全部排行榜](https://github.com/LuanMingyang/vue2-music-app/raw/master/preview/rank.png){:width="200px"}
-![排行榜详情](https://github.com/LuanMingyang/vue2-music-app/raw/master/preview/rank2.png){:width="200px"}
+<img width="200" src="https://github.com/LuanMingyang/vue2-music-app/raw/master/preview/rank.png" alt="全部排行榜"/>
+<img width="200" src="https://github.com/LuanMingyang/vue2-music-app/raw/master/preview/rank2.png" alt="排行榜详情"/>
 
 #### 播放器
 
-![播放器](https://github.com/LuanMingyang/vue2-music-app/raw/master/preview/player.png){:width="200px"}
-![播放器](https://github.com/LuanMingyang/vue2-music-app/raw/master/preview/playlist.png){:width="200px"}
+<img width="200" src="https://github.com/LuanMingyang/vue2-music-app/raw/master/preview/player.png" alt="播放器"/>
+<img width="200" src="https://github.com/LuanMingyang/vue2-music-app/raw/master/preview/playlist.png" alt="播放列表"/>
