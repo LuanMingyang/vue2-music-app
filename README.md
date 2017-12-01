@@ -35,3 +35,7 @@ npm run build
 ```
 
 ### 效果图
+
+##### 首页
+
+![首页](https://github.com/LuanMingyang/vue2-music-app/raw/master/preview/musicHall.png)
