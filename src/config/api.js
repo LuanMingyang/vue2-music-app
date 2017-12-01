@@ -1,9 +1,6 @@
 const COMMON_PARAMS = 'g_tk=5381&loginUin=0&hostUin=0&inCharset=utf8&outCharset=utf-8&notice=0&platform=yqq&needNewCode=0'
 const COMMON_PARAMS_H5 = 'g_tk=5381&uin=0&inCharset=utf-8&outCharset=utf-8&notice=0&platform=h5&needNewCode=0&format=jsonp'
-// const COMMON_PARAMS_3G = 'g_tk=5381&loginUin=0&hostUin=0&inCharset=utf8&outCharset=utf-8&notice=0&platform=h5&needNewCode=0&isParent=0&showType=2&groupId=1&index=0'
 const C_Y_QQ_COM = 'https://c.y.qq.com'
-// const C_Y_QQ_COM = '/cyqq'
-// const H5VV_VIDEO_QQ_COM = '/h5vv'
 
 /* 搜索 */
 // 热门搜索关键字
@@ -51,12 +48,6 @@ const URL_SINGER_DESC = `${C_Y_QQ_COM}/splcloud/fcgi-bin/fcg_get_singer_desc.fcg
 const URL_SINGER_FANS = `${C_Y_QQ_COM}/rsc/fcgi-bin/fcg_order_singer_getnum.fcg?utf8=1&format=jsonp&${COMMON_PARAMS}`
 // 歌手的MV
 const URL_SINGER_MVS = `${C_Y_QQ_COM}/mv/fcgi-bin/fcg_singer_mv.fcg?cid=205360581&format=jsonp&${COMMON_PARAMS}`
-
-const MusicJsonCallback = function (data) {
-  return data
-}
-
-global.MusicJsonCallback = MusicJsonCallback
 
 export default {
   URL_HOT_KEY,
