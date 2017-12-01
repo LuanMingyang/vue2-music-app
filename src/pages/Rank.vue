@@ -1,0 +1,219 @@
+<template>
+  <div class="container" v-if="rank">
+    <header>
+      <div id="background" class="background" :style="{ backgroundImage: 'url(' + rank.topinfo.pic_album + ')' }"><div class="mask"></div></div>
+      <!-- 顶部固定不变的页头 -->
+      <div class="fixed">
+        <i class="iconfont btn-back" @click="goBack">&#xe605;</i>
+        <h1 v-show="showFixedTitle">{{ rank.topinfo.ListName }}</h1>
+        <i class="iconfont btn btn-menu">&#xe725;</i>
+      </div>
+      <!-- 顶部的下方的排行榜信息 -->
+      <div class="rank-info">
+        <p class="rank-name">{{ rank.topinfo.ListName }} 第{{ rank.day_of_year }}天</p>
+        <p class="rank-time">{{ rank.date }} 更新</p>
+      </div>
+    </header>
+    <!-- 导航 -->
+    <div class="nav-wrap">
+      <ul class="nav clearfix">
+        <li :class="[activeIndex === 0 ? 'active' : '']" @click="changeNav(0)">歌曲</li>
+        <li :class="[activeIndex === 3 ? 'active' : '']" @click="changeNav(3)">详情</li>
+      </ul>
+    </div>
+    <div class="main-content">
+      <!-- 歌曲列表 -->
+      <ul class="song-list" v-if="activeIndex === 0">
+        <song-list-item v-for="(song, index) in rank.songlist" :key="song.data.songid"
+        :songList="rank.songlist" :song="song.data" :songid="song.data.songid" :sindex="index" :songname="song.data.songname" :isOnly="song.data.isonly" :haveMV="false"
+        :singer="song.data.singer[0].name" :album="song.data.albumname"></song-list-item>
+      </ul>
+    </div>
+    <!-- 底部播放条 -->
+    <footer>
+      <player-bar></player-bar>
+    </footer>
+  </div>
+</template>
+
+<script>
+import PlayerBar from '../components/PlayerBar'
+import SongListItem from '../components/SongListItem'
+import API from '../config/api'
+import { mapState } from 'vuex'
+
+export default {
+  props: ['topid'],
+  data: function () {
+    return {
+      showFixedTitle: false, // 是否显示 最顶部排行榜名
+      rank: null, // 请求到的排行榜数据
+      activeIndex: 0
+    }
+  },
+  components: {
+    PlayerBar,
+    SongListItem
+  },
+  methods: {
+    // 返回
+    goBack: function () {
+      window.history.back()
+    },
+    // 切换导航
+    changeNav: function (index) {
+      this.activeIndex = index
+    }
+  },
+  created: function () {
+    // 请求排行榜数据
+    this.$http.jsonp(API.URL_TOPLIST_LIST,
+      {
+        params: {
+          topid: this.topid
+        },
+        jsonp: 'jsonpCallback'
+      }
+    ).then((response) => {
+      // console.log(response.data)
+      this.rank = response.data
+    }).catch(function (response) {
+      console.log(response)
+    })
+  }
+}
+</script>
+
+<style lang="scss" scoped>
+$headerHeight: 260px;
+$fixedHeight: 45px;
+$green: #41B883;
+
+header {
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: 0;
+  height: $headerHeight;
+  color: #fff;
+  z-index: 1;
+
+  .background {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    // filter: blur(8px);
+    // transform: scale(1.05);
+
+    .mask {
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, .6);
+    }
+  }
+
+  .fixed {
+    position: absolute;
+    top: 0;
+    right: 0;
+    left: 0;
+    width: 100%;
+    height: $fixedHeight;
+    text-align: center;
+    line-height: $fixedHeight;
+    z-index: 9999;
+    // background-color: rgba(0, 0, 0, .7);
+
+    h1 {
+      font-size: 16px;
+      font-weight: normal;
+    }
+
+    .btn-back {
+      position: absolute;
+      color: #fff;
+      top: 0;
+      left: 0;
+      padding: 0 15px;
+      font-size: 24px;
+      line-height: $fixedHeight;
+    }
+
+    .btn-menu {
+      position: absolute;
+      color: #fff;
+      top: 0;
+      right: 0;
+      padding: 0 15px;
+      font-size: 22px;
+      line-height: $fixedHeight;
+    }
+  }
+
+  .rank-info {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    font-weight: lighter;
+    text-align: center;
+
+    .rank-name {
+      // line-height: 40px;
+      letter-spacing: 1px;
+    }
+
+    .rank-time {
+      position: relative;
+      font-size: 12px;
+      line-height: 30px;
+    }
+  }
+}
+
+.nav-wrap {
+  position: fixed;
+  top: $headerHeight;
+  left: 0;
+  right: 0;
+  background-color: #fff;
+  z-index: 999;
+
+  .nav {
+    padding: 0 3%;
+    border-bottom: 0.5px solid #ccc;
+
+    li {
+      float: left;
+      width: 50%;
+      height: $fixedHeight - 3px;
+      color: #666;
+      text-align: center;
+      line-height: $fixedHeight - 3px;
+      // letter-spacing: 1px;
+
+      &.active {
+        color: $green;
+        border-bottom: 3px solid $green;
+      }
+    }
+  }
+}
+
+.main-content {
+  margin-top: $headerHeight - 3px;
+  background-color: #fff;
+  z-index: 999;
+
+  .song-list {
+    padding-left: 10px;
+  }
+}
+</style>
