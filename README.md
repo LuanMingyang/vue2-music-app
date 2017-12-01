@@ -36,6 +36,25 @@ npm run build
 
 ### 效果图
 
-##### 首页
+#### 首页
 
-![首页](https://github.com/LuanMingyang/vue2-music-app/raw/master/preview/musicHall.png)
+![首页](https://github.com/LuanMingyang/vue2-music-app/raw/master/preview/musicHall.png){:width="200px"}
+
+#### 搜索
+
+![搜索](https://github.com/LuanMingyang/vue2-music-app/raw/master/preview/search2.png){:width="200px"}
+![搜索](https://github.com/LuanMingyang/vue2-music-app/raw/master/preview/search.png){:width="200px"}
+
+#### 歌手首页
+
+![歌手首页](https://github.com/LuanMingyang/vue2-music-app/raw/master/preview/singer.png){:width="200px"}
+
+#### 排行榜
+
+![全部排行榜](https://github.com/LuanMingyang/vue2-music-app/raw/master/preview/rank.png){:width="200px"}
+![排行榜详情](https://github.com/LuanMingyang/vue2-music-app/raw/master/preview/rank2.png){:width="200px"}
+
+#### 播放器
+
+![播放器](https://github.com/LuanMingyang/vue2-music-app/raw/master/preview/player.png){:width="200px"}
+![播放器](https://github.com/LuanMingyang/vue2-music-app/raw/master/preview/playlist.png){:width="200px"}
