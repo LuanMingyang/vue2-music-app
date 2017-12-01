@@ -1,34 +1,35 @@
 # vue2-music-app
 
-> vue + vuex + vue-resource + vue-router + vue-awesome-swiper Ä£·ÂqqÒôÀÖAPP
-> ±¾ÈËÒ²ÊÇ³õÑ§vue£¬²»×ãÖ®´¦Ï£Íû´ó¼Ò¶à¶àÖ¸½Ì£¬¹²Í¬Ñ§Ï°½ø²½
+> vue + vuex + vue-resource + vue-router + vue-awesome-swiper æ¨¡ä»¿qqéŸ³ä¹APP
 
-### ÒÑÊµÏÖ¹¦ÄÜ
-1. Ê×Ò³
-2. ÅÅÐÐ°ñ
-3. ËÑË÷£¨ÈÈÃÅËÑË÷¡¢ÀúÊ·ËÑË÷¼ÇÂ¼£©
-4. ¸èÊÖÖ÷Ò³
-5. ²¥·ÅÆ÷£¨²¥·Å¡¢ÔÝÍ£¡¢ÇÐ»»ÉÏÒ»Ê×¡¢ÇÐ»»ÏÂÒ»Ê×¡¢ÇÐ»»²¥·ÅÄ£Ê½¡¢¸è´Ê£©
-6. ²¥·ÅÁÐ±í
+> æœ¬äººä¹Ÿæ˜¯åˆå­¦vueï¼Œä¸è¶³ä¹‹å¤„å¸Œæœ›å¤§å®¶å¤šå¤šæŒ‡æ•™ï¼Œå…±åŒå­¦ä¹ è¿›æ­¥
 
-### Ð§¹ûÑÝÊ¾
+### å·²å®žçŽ°åŠŸèƒ½
+1. é¦–é¡µ
+2. æŽ’è¡Œæ¦œ
+3. æœç´¢ï¼ˆçƒ­é—¨æœç´¢ã€åŽ†å²æœç´¢è®°å½•ï¼‰
+4. æ­Œæ‰‹ä¸»é¡µ
+5. æ’­æ”¾å™¨ï¼ˆæ’­æ”¾ã€æš‚åœã€åˆ‡æ¢ä¸Šä¸€é¦–ã€åˆ‡æ¢ä¸‹ä¸€é¦–ã€åˆ‡æ¢æ’­æ”¾æ¨¡å¼ã€æ­Œè¯ï¼‰
+6. æ’­æ”¾åˆ—è¡¨
 
-[dome](https://luanmingyang.github.io/vue2-music-app/dist/index.html) £¨ÇëÓÃchromeÊÖ»úÄ£Ê½²é¿´£©
+### æ•ˆæžœæ¼”ç¤º
 
-### ÏîÄ¿ÔËÐÐ
+[dome](https://luanmingyang.github.io/vue2-music-app/dist/index.html) ï¼ˆè¯·ç”¨chromeæ‰‹æœºæ¨¡å¼æŸ¥çœ‹ï¼‰
+
+### é¡¹ç›®è¿è¡Œ
 
 ``` bash
-# ¿ËÂ¡µ½±¾µØ
+# å…‹éš†åˆ°æœ¬åœ°
 git clone https://github.com/LuanMingyang/vue2-music-app.git
 
-# °²×°ÒÀÀµ
+# å®‰è£…ä¾èµ–
 npm install
 
-# ¿ª·¢»·¾³£¨localhost:3030£©
+# å¼€å‘çŽ¯å¢ƒï¼ˆlocalhost:3030ï¼‰
 npm run dev
 
-# ´ò°ü·¢²¼
+# æ‰“åŒ…å‘å¸ƒ
 npm run build
 ```
 
-### Ð§¹ûÍ¼
+### æ•ˆæžœå›¾
