@@ -44,8 +44,7 @@ npm run build
 
 #### 搜索
 
-<img width="200" src="https://github.com/LuanMingyang/vue2-music-app/raw/master/preview/search2.png" alt="搜索"/>
-<img width="200" src="https://github.com/LuanMingyang/vue2-music-app/raw/master/preview/search.png" alt="搜索结果"/>
+<img width="200" src="https://github.com/LuanMingyang/vue2-music-app/raw/master/preview/search2.png" alt="搜索"/><img width="200" src="https://github.com/LuanMingyang/vue2-music-app/raw/master/preview/search.png" alt="搜索结果"/>
 
 #### 歌手首页
 
