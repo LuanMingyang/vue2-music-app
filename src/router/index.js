@@ -19,11 +19,6 @@ export default new Router({
       component: MusicHall
     },
     {
-      path: '/index',
-      name: 'musicHall',
-      component: MusicHall
-    },
-    {
       path: '/search',
       name: 'search',
       component: Search
