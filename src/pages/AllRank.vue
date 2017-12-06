@@ -100,7 +100,7 @@ export default {
 .rank-img-wrap {
   position: relative;
   float: left;
-  width: 35%;
+  width: 100px;
 
   .rank-img {
     width: 100%
@@ -132,27 +132,17 @@ export default {
 
 .rank-top-three-wrap {
   float: left;
+  padding: 5px 0;
   width: 60%;
-
-  li {
-    padding-top: 10px;
-  }
-
-  li + li {
-    margin-top: 10px;
-  }
 
   .song {
     padding-left: 10px;
     width: 100%;
-    // line-height: 40px;
+    line-height: 30px;
     overflow: hidden;
+    white-space: nowrap;
     text-overflow: ellipsis;
-    word-break: break-all;
-    display: -webkit-box;
-    -webkit-line-clamp: 1;
-    -webkit-box-orient: vertical;
-
+    
     .singer {
       color: #999;
     }
