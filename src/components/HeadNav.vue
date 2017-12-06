@@ -114,15 +114,9 @@ export default {
     background-color: #38a675;
 
     &::-webkit-input-placeholder {
-      font-family: 'iconfont' !important;
       color: #fff;
       text-align: center;
     }
-  }
-
-  .search-input::-webkit-input-placeholder::before {
-    font-family: 'iconfont';
-    content: '&#xe689;';
   }
 
 </style>
