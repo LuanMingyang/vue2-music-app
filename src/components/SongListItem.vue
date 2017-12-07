@@ -37,6 +37,7 @@ export default {
 .song {
   position: relative;
   padding: 10px 0;
+  background-color: #fff;
   border-bottom: 0.5px solid #ddd;
 
   .song-name {

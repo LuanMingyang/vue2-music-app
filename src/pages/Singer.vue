@@ -1,31 +1,31 @@
 <template>
   <div class="container" v-if="singer">
-    <header>
+    <!-- 顶部固定不变的页头 -->
+    <div id="fixedHeader" class="fixedHeader">
+      <i class="iconfont btn-back" @click="goBack">&#xe605;</i>
+      <h1 v-show="showFixedTitle">{{ singer.singer_name }}</h1>
+      <i class="iconfont btn btn-menu">&#xe725;</i>
+    </div>
+    <div class="header">
       <div id="background" class="background" :style="{ backgroundImage: 'url(' + getSingerPic + ')' }"><div class="mask"></div></div>
-      <!-- 顶部固定不变的页头 -->
-      <div class="fixed">
-        <i class="iconfont btn-back" @click="goBack">&#xe605;</i>
-        <h1 v-show="showFixedTitle">{{ singer.singer_name }}</h1>
-        <i class="iconfont btn btn-menu">&#xe725;</i>
-      </div>
       <!-- 顶部的下方的歌手信息 -->
-      <div class="singer-info">
+      <div id="singer-info" class="singer-info">
         <p class="singer-name">{{ singer.singer_name }}</p>
         <p class="singer-fans">————— <span>{{ singer.fans | fansNumberFormat }}粉丝</span> —————</p>
         <span class="follow" @click="follow"><i class="iconfont icon-get" v-show="followed">&#xe608;</i><span v-html="followed ? '已关注' : '关注'"></span></span>
         <span class="medal">勋章</span>
       </div>
-    </header>
-    <!-- 歌手信息导航 -->
-    <div class="nav-wrap">
-      <ul class="nav clearfix">
-        <li :class="[activeIndex === 0 ? 'active' : '']" @click="changeNav(0)">歌曲 {{ singer.total }}</li>
-        <li :class="[activeIndex === 1 ? 'active' : '']" @click="changeNav(1)">专辑 {{ singer.albumTotal }}</li>
-        <li :class="[activeIndex === 2 ? 'active' : '']" @click="changeNav(2)">MV {{ singer.mvTotal }}</li>
-        <li :class="[activeIndex === 3 ? 'active' : '']" @click="changeNav(3)">详情</li>
-      </ul>
     </div>
-    <div class="main-content" v-if="data">
+    <div id="content" class="main-content" v-if="data" :class="showFixedTitle ? 'fixed' : ''" @scroll="contentScroll">
+      <!-- 导航 -->
+      <div id="nav-wrap" class="nav-wrap" :class="showFixedTitle ? 'fixed' : ''">
+        <ul class="nav clearfix">
+          <li :class="[activeIndex === 0 ? 'active' : '']" @click="changeNav(0)">歌曲 {{ singer.total }}</li>
+          <li :class="[activeIndex === 1 ? 'active' : '']" @click="changeNav(1)">专辑 {{ singer.albumTotal }}</li>
+          <li :class="[activeIndex === 2 ? 'active' : '']" @click="changeNav(2)">MV {{ singer.mvTotal }}</li>
+          <li :class="[activeIndex === 3 ? 'active' : '']" @click="changeNav(3)">详情</li>
+        </ul>
+      </div>
       <!-- 歌曲列表 -->
       <ul class="song-list" v-if="activeIndex === 0">
         <song-list-item v-for="(song, index) in data.list" :key="song.musicData.songid"
@@ -39,7 +39,7 @@
         </album-or-m-v-list-item>
       </ul>
       <!-- MV列表 -->
-      <ul class="album-list" v-if="activeIndex === 2">
+      <ul class="mv-list" v-if="activeIndex === 2">
         <album-or-m-v-list-item v-for="mv in data.list" :key="mv.id" :type="'mv'" :name="mv.title" 
           :pic="mv.pic" :publicTime="mv.date" :showInto="false">
         </album-or-m-v-list-item>
@@ -139,6 +139,15 @@ export default {
       }).catch(function (response) {
         console.log(response)
       })
+    },
+    // 列表滚动事件
+    contentScroll: function () {
+      var top = document.getElementById('content').scrollTop
+      if (top === 0) {
+        document.getElementById('fixedHeader').style.backgroundColor = 'transparent'
+        document.getElementById('background').style.filter = 'none'
+        this.showFixedTitle = false
+      }
     }
   },
   filters: {
@@ -170,6 +179,23 @@ export default {
     })
     // 默认请求歌曲
     this.requestData()
+  },
+  mounted: function () {
+    window.addEventListener('scroll', () => {
+      var afterScrollY = window.scrollY
+      if (afterScrollY > 0 && afterScrollY < 215) {
+        var percent = afterScrollY / 215
+        document.getElementById('fixedHeader').style.backgroundColor = 'rgba(0, 0, 0, ' + percent * 0.3 + ')'
+        document.getElementById('background').style.filter = 'blur(' + percent * 8 + 'px)'
+        this.showFixedTitle = false
+      } else if (afterScrollY > 215) { // 向下滚动距离大于215
+        document.getElementById('fixedHeader').style.backgroundColor = 'rgba(0, 0, 0, .3)'
+        document.getElementById('background').style.filter = 'blur(8px)'
+        this.showFixedTitle = true
+      } else if (this.showFixedTitle && afterScrollY === 0) {
+        this.showFixedTitle = true
+      }
+    }, false)
   }
 }
 </script>
@@ -179,14 +205,52 @@ $headerHeight: 260px;
 $fixedHeight: 45px;
 $green: #41B883;
 
-header {
+.fixedHeader {
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: 0;
+  width: 100%;
+  height: $fixedHeight;
+  color: #fff;
+  text-align: center;
+  line-height: $fixedHeight;
+  z-index: 9999;
+  // background-color: rgba(0, 0, 0, .3);
+
+  h1 {
+    font-size: 16px;
+    font-weight: normal;
+  }
+
+  .btn-back {
+    position: absolute;
+    color: #fff;
+    top: 0;
+    left: 0;
+    padding: 0 15px;
+    font-size: 24px;
+    line-height: $fixedHeight;
+  }
+
+  .btn-menu {
+    position: absolute;
+    color: #fff;
+    top: 0;
+    right: 0;
+    padding: 0 15px;
+    font-size: 22px;
+    line-height: $fixedHeight;
+  }
+}
+
+.header {
   position: fixed;
   top: 0;
   right: 0;
   left: 0;
   height: $headerHeight;
   color: #fff;
-  z-index: 1;
 
   .background {
     position: absolute;
@@ -200,50 +264,12 @@ header {
     background-position: center;
     background-size: cover;
     // filter: blur(8px);
-    // transform: scale(1.05);
+    transform: scale(1.05);
 
     .mask {
       width: 100%;
       height: 100%;
       background-color: rgba(0, 0, 0, .15);
-    }
-  }
-
-  .fixed {
-    position: absolute;
-    top: 0;
-    right: 0;
-    left: 0;
-    width: 100%;
-    height: $fixedHeight;
-    text-align: center;
-    line-height: $fixedHeight;
-    z-index: 9999;
-    // background-color: rgba(0, 0, 0, .7);
-
-    h1 {
-      font-size: 16px;
-      font-weight: normal;
-    }
-
-    .btn-back {
-      position: absolute;
-      color: #fff;
-      top: 0;
-      left: 0;
-      padding: 0 15px;
-      font-size: 24px;
-      line-height: $fixedHeight;
-    }
-
-    .btn-menu {
-      position: absolute;
-      color: #fff;
-      top: 0;
-      right: 0;
-      padding: 0 15px;
-      font-size: 22px;
-      line-height: $fixedHeight;
     }
   }
 
@@ -292,11 +318,7 @@ header {
 }
 
 .nav-wrap {
-  position: fixed;
-  top: $headerHeight;
-  left: 0;
-  right: 0;
-  // margin-top: $headerHeight - $fixedHeight;
+  width: 100%;
   background-color: #fff;
   z-index: 999;
 
@@ -311,7 +333,6 @@ header {
       color: #666;
       text-align: center;
       line-height: $fixedHeight - 3px;
-      // letter-spacing: 1px;
 
       &.active {
         color: $green;
@@ -319,15 +340,36 @@ header {
       }
     }
   }
+
+  &.fixed {
+    position: fixed;
+    top: $fixedHeight;
+    // margin-top: 0;
+  }
 }
 
 .main-content {
-  margin-top: $headerHeight - 3px;
+  position: relative;
+  margin-top: $headerHeight - $fixedHeight;
+  width: 100%;
   background-color: #fff;
-  z-index: 999;
+  z-index: 99;
 
   .song-list {
     padding-left: 10px;
+    background-color: #fff;
+  }
+
+  .album-list, .mv-list {
+    background-color: #fff;
+  }
+
+  &.fixed {
+    position: fixed;
+    top: $fixedHeight + $fixedHeight - 3px;
+    bottom: 60px;
+    margin-top: 0;
+    overflow: auto;
   }
 }
 </style>

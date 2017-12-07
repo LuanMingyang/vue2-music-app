@@ -73,6 +73,8 @@ export default {
 
 html {
   overflow-x: hidden;
+  // -ms-overflow-style: none;
+  // overflow: -moz-scrollbars-none;
 }
 
 body {
@@ -84,6 +86,10 @@ body {
   color: #333;
   /*禁止页面文字选择*/
   user-select: none;
+}
+
+::-webkit-scrollbar {
+  display: none;
 }
 
 /*禁用长按页面时的弹出菜单*/

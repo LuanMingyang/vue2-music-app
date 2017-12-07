@@ -22,6 +22,7 @@ export default {
 .item {
   position: relative;
   margin-bottom: 2px;
+  background-color: #fff;
 
   .item-img {
     float: left;
