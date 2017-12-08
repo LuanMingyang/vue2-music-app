@@ -103,8 +103,6 @@ export default {
     // 滚动事件监听
     window.addEventListener('scroll', () => {
       var afterScrollY = window.scrollY
-      console.log(afterScrollY)
-      
       if (afterScrollY > 0 && afterScrollY < 215) { // 向下滚动距离小于215
         var percent = afterScrollY / 215
         document.getElementById('fixedHeader').style.backgroundColor = 'rgba(0, 0, 0, ' + percent * 0.3 + ')'
@@ -249,6 +247,7 @@ $green: #41B883;
 .main-content {
   position: relative;
   margin-top: $headerHeight - $fixedHeight;
+  width: 100%;
   background-color: #fff;
   z-index: 999;
 
