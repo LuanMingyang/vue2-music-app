@@ -107,10 +107,12 @@ export default {
         var percent = afterScrollY / 215
         document.getElementById('fixedHeader').style.backgroundColor = 'rgba(0, 0, 0, ' + percent * 0.3 + ')'
         document.getElementById('background').style.filter = 'blur(' + percent * 8 + 'px)'
+        document.getElementById('background').style.transform = 'scale(' + (1 + percent * 0.05) + ')'
         this.showFixedTitle = false
       } else if (afterScrollY > 215) { // 向下滚动距离大于215
         document.getElementById('fixedHeader').style.backgroundColor = 'rgba(0, 0, 0, .3)'
         document.getElementById('background').style.filter = 'blur(8px)'
+        document.getElementById('background').style.transform = 'scale(1.05)'
         this.showFixedTitle = true
       } else if (this.showFixedTitle && afterScrollY === 0) { // content设置为fixed时
         this.showFixedTitle = true
@@ -184,7 +186,7 @@ $green: #41B883;
     background-position: center;
     background-size: cover;
     // filter: blur(8px);
-    transform: scale(1.05);
+    // transform: scale(1.05);
 
     .mask {
       width: 100%;
