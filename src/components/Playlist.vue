@@ -18,7 +18,7 @@
       <ul class="song-list">
         <li class="song" v-for="(song, index) in playlist" :key="index" :class="judgePlaying(song) ? 'active' : ''" @click.stop="clickSong(song, index)">
           <p>{{ song.name || song.songname }}<span> - {{ song.singer[0].name }}</span></p>
-          <i class="iconfont btn-like" @click.stop="like(song)" :class="judgeLiked(song) ? 'liked' : ''" v-html="judgeLiked(song) ? '&#xe699;' : '&#xe607;'"></i>
+          <i class="iconfont btn-like" @click.stop="setSongLiked(song)" :class="judgeLiked(song) ? 'liked' : ''" v-html="judgeLiked(song) ? '&#xe699;' : '&#xe607;'"></i>
           <i class="iconfont btn-delete" @click.stop="deleteSong(index)">&#xe65d;</i>
         </li>
       </ul>
@@ -31,17 +31,13 @@
 <script>
 import { mapState, mapGetters, mapActions } from 'vuex'
 export default {
-  data: function () {
-    return {
-      likedSongs: [] // 我喜欢的歌曲
-    }
-  },
   computed: {
     ...mapState({
       songPlaying: 'song',
       playMethod: 'playMethod',
       playlist: 'playlist',
-      playlistShow: 'playlistShow'
+      playlistShow: 'playlistShow',
+      likedSongs: 'likedSongs'
     }),
     ...mapGetters([
       'getPlayMethod'
@@ -53,7 +49,8 @@ export default {
       'changePlayMethod',
       'setPlaylistShow',
       'changeSongPlay',
-      'updatePlaylist'
+      'updatePlaylist',
+      'setSongLiked'
     ]),
     // 切换歌曲
     clickSong: function (song, index) {
@@ -82,21 +79,7 @@ export default {
       if (!song.id) {
         song.id = song.songid
       }
-      return this.likedSongs.indexOf(song.id) > 0
-    },
-    // 标记/取消标记 歌曲为我喜欢
-    like: function (song) {
-      if (!song.id) {
-        song.id = song.songid
-      }
-      var liked = this.judgeLiked(song)
-      if (liked) {
-        var index = this.likedSongs.indexOf(song.id)
-        this.likedSongs.splice(index, 1)
-      } else {
-        this.likedSongs.push(song.id)
-      }
-      localStorage.likedSongs = JSON.stringify(this.likedSongs)
+      return this.likedSongs.indexOf(song.id) > -1
     },
     // 从播放列表删除指定歌曲
     deleteSong: function (index) {
@@ -112,12 +95,6 @@ export default {
       // } else {
       //   document.body.style.overflowY = 'auto'
       // }
-    }
-  },
-  created: function () {
-    // 获取已标记为喜欢的歌曲
-    if (localStorage.likedSongs) {
-      this.likedSongs = JSON.parse(localStorage.likedSongs)
     }
   }
 }

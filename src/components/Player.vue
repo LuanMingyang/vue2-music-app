@@ -35,7 +35,7 @@
         </div>
         <!-- 分享、下载等按钮 -->
         <div class="other-operations">
-          <i class="iconfont btn-like" @click.stop="like" :class="liked ? 'liked' : ''" v-html="liked ? '&#xe699;' : '&#xe607;'"></i>
+          <i class="iconfont btn-like" @click.stop="setSongLiked(song)" :class="liked ? 'liked' : ''" v-html="liked ? '&#xe699;' : '&#xe607;'"></i>
           <i class="iconfont btn-download">&#xe890;</i>
           <i class="iconfont btn-share">&#xe60d;</i>
           <i class="iconfont btn-comment">&#xe694;</i>
@@ -49,11 +49,6 @@
 import { mapState, mapGetters, mapActions } from 'vuex'
 
 export default {
-  data: function () {
-    return {
-      likedSongs: [] // 我喜欢的歌曲
-    }
-  },
   computed: {
     ...mapState([
       'playMethod',
@@ -63,7 +58,8 @@ export default {
       'playlist',
       'duration',
       'playingTime',
-      'currentLyricIndex'
+      'currentLyricIndex',
+      'likedSongs'
     ]),
     ...mapGetters([
       'getAlbumCover',
@@ -116,7 +112,8 @@ export default {
       'updatePlayingTime',
       'updateLyricIndex',
       'changePlayMethod',
-      'setPlaylistShow'
+      'setPlaylistShow',
+      'setSongLiked'
     ]),
     // 上一首
     prevSong: function () {
@@ -149,16 +146,6 @@ export default {
       }
       var nextSong = this.playlist[index]
       this.changeSongPlay({ song: nextSong, index: index })
-    },
-    // 标记/取消标记 歌曲为我喜欢
-    like: function () {
-      if (this.liked) {
-        var index = this.likedSongs.indexOf(this.getSong.id)
-        this.likedSongs.splice(index, 1)
-      } else {
-        this.likedSongs.push(this.getSong.id)
-      }
-      localStorage.likedSongs = JSON.stringify(this.likedSongs)
     }
   },
   watch: {
@@ -182,12 +169,6 @@ export default {
       var minutes = parseInt(time / 60)
       var seconds = parseInt(time % 60)
       return (Array(2).join(0) + minutes).slice(-2) + ':' + (Array(2).join(0) + seconds).slice(-2)
-    }
-  },
-  created: function () {
-    // 获取已标记为喜欢的歌曲
-    if (localStorage.likedSongs) {
-      this.likedSongs = JSON.parse(localStorage.likedSongs)
     }
   }
 }

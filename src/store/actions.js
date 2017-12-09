@@ -42,5 +42,9 @@ export default {
   // 设置播放列表的隐藏与显示
   setPlaylistShow ({ commit }, show) {
     commit('SET_PLAYLISTSHOW', show)
+  },
+  // 标记/取消标记歌曲为“我喜欢”
+  setSongLiked ({ commit }, song) {
+    commit('SET_SONGLIKED', song)
   }
 }
