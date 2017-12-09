@@ -1,5 +1,5 @@
 <template>
-  <div class="player-wrap" @click="setPlayerShow(true)">
+  <div class="player-wrap" @click="setPlayerShow(true)" v-show="show">
     <div class="album-img-wrap" v-show="playlist.length > 0">
       <img id="album-cover" class="album-img" :src="getAlbumCover">
     </div>
@@ -27,6 +27,11 @@ import Playlist from '../components/Playlist'
 import Player from '../components/Player'
 import { mapState, mapGetters, mapActions } from 'vuex'
 export default {
+  data: function () {
+    return {
+      show: true
+    }
+  },
   components: {
     Playlist,
     Player
@@ -85,6 +90,15 @@ export default {
       } else {
         // 底部播放条 专辑封面图 停止旋转
         document.getElementById('album-cover').style.animationPlayState = 'paused'
+      }
+    }
+  },
+  mounted: function () {
+    window.onresize = () => {
+      if (window.innerHeight <= 320 || document.body.clientHeight <= 320) { // 页面高度小于320时，隐藏底部播放工具
+        this.show = false
+      } else {
+        this.show = true
       }
     }
   }
