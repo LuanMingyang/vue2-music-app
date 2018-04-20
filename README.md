@@ -2,8 +2,6 @@
 
 > vue + vuex + vue-resource + vue-router + vue-awesome-swiper 模仿qq音乐APP
 
-> 功能和代码还不够完善，后续会再更新
-
 > 本人也是初学vue，不足之处还希望大家多多指教，共同学习进步
 
 ### 已实现功能
